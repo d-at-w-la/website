@@ -1,0 +1,13 @@
+mixin resource(resource)
+	.col-sm-4
+		article(role="article", itemscope itemtype="http://schema.org/BlogPosting").post-card
+			if resource.image.exists
+				a(href='/resources/item/' + resource.slug).post-image: img(src=resource._.image.thumbnail(600,320), alt=resource.title).img-responsive
+			.post-summary
+				.post-byline
+					.post-author: a(href='/resources/item/' + resource.slug)=resource.author.name.full
+					//- .date-stamp: em=moment(resource.publishedDate).fromNow()
+
+				h4(itemprop='name').post-title.mv-1
+					a(href='/resources/item/' + resource.slug, itemprop='url')=resource.title
+				.post-content-brief(itemprop='description')!= resource.description

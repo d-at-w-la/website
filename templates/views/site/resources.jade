@@ -1,0 +1,40 @@
+extends ../../layouts/default
+
+include ../../mixins/resource
+
+block intro
+	.page-intro: .container
+		h1.page-title=data.category ? data.category.name : 'Resources'
+		if data.category && data.category.tagline
+			=data.category.tagline
+		else 
+			p.lead
+				| These are some resources contributed by our members.&nbsp;
+				a(href='/join').js-auth-trigger Email us
+				| &nbsp;your suggestions.
+
+block content
+	.page-content: .container
+		.row
+			div(class= data.categories.length || !data.resources.length ? 'col-md-10' : 'col-md-10 col-md-offset-1')
+				if filters.category && !data.category
+					h3 Invalid Category.
+				else
+					if data.resources.length
+						.post-cards.row(itemscope itemtype="http://schema.org/Blog")
+							each resource in data.resources
+								+resource(resource)
+					else
+						if data.category
+							h3.text-muted No resources in the category #{data.category.name}.
+						else
+							h3.text-muted No resources uploaded yet.
+			
+			if data.categories.length
+				.col-md-2
+					if data.categories.length
+						h5.text-muted Filter by tag
+						ul.list-unstyled.tags-list
+							li: a(href='/resources', class=!data.categories ? 'active' : false) All
+							each tag in data.categories
+								li: a(href='/resources/' + tag.key, class=data.category && data.category.id == tag.id ? 'active' : false).list-group-item= tag.name

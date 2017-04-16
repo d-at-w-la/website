@@ -1,0 +1,43 @@
+extends ../../layouts/default
+
+include ../../mixins/organiser
+
+block intro
+	.page-intro: .container
+		h1.page-title Mission Statement
+		p.lead At 
+			b Democracy at Work - Los Angeles (D@W-LA)
+			|, we endeavor to further our parent organization’s purpose, that is, raising awareness and generating a positive cultural shift towards Worker Self-Directed Enterprises. WSDEs are a way to reorganize our workplaces in a truly democratic fashion, where decision-making power and wealth are shared equally. Through promotion, education, and connection with local organizations, we aim to be a hub in Los Angeles that advocates for and facilitates the transformation of our economic system.  
+		hr.mv-3
+		p.lead We hold monthly meetings on Saturday afternoons in which we discuss current economic issues and potential solutions that involve worker cooperatives. During the meetings, we also host guest speakers who help us understand the many ways through which we can bring about change.    
+		p.lead Members of our group also come together to work on long-term and short-term projects.
+		p.lead We have 
+			a(href='/images/focus_groups.png') Focus Groups 
+			|where members can concentrate their efforts in ways best suited to their interests and abilities
+		p.lead 
+			b Interested in getting involved with one of these groups? 
+			a(href='mailto:losangeles@democracyatwork.info') Contact Us!
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="L7K7KMX9BGBHQ">
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
+		hr.mv-3
+		
+		h3 Meet our Core Members:
+
+block content
+	.page-content
+		.section.highlight: .container
+			//- h2 Organisers
+			//- p.lead Each month the SydJS team works to bring you great presenters in a great venue.
+			.row.about-organisers.col-md-offset-1
+				each org in organisers
+					.col-sm-4
+						+organiser(org)
+
+block js
+	// twitter
+	script.
+		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

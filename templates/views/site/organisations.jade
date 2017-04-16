@@ -1,0 +1,26 @@
+extends ../../layouts/default
+
+include ../../mixins/organisation
+
+block intro
+	.page-intro: .container
+		h1 Partners
+		p.lead The organizations that are partners with 
+			b Democracy@Work - LA
+			|. Should you be here? Join us!
+		//- .buttons
+			if !user
+				a(href='/join').btn.btn-primary Join D@W-LA
+			a(href='/members').btn.btn-default View Members
+			a(href='/members/mentors').btn.btn-default View Mentors
+
+block content
+	.page-content: .container
+		.organisations
+			if organisations.length
+				each org, i in organisations
+					if i
+						hr
+					+organisation(org)
+			else
+				h3.text-muted There are no organizations yet.

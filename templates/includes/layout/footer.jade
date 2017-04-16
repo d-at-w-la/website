@@ -1,0 +1,30 @@
+//- SITE FOOTER
+footer.site-footer.site-footer--sticky: .container
+	.row
+		.col-sm-4
+			h5.footer-heading About
+			p We hold monthly meetings on Saturday afternoons in which we discuss current economic issues and potential solutions that involve worker cooperatives. During the meetings, we also host guest speakers who help us understand the many ways through which we can bring about change.   
+			ul.list-inline
+				li: a(href='/about') More about Democracy@Work - LA
+				li: a(href='mailto: losangeles@democracyatwork.info') Contact us
+
+		.col-sm-8
+			.row
+				.col-xs-4
+					h5.footer-heading Members
+					ul
+						li: a(href='/members') Members
+						if !user
+							li: a(href='/join').js-auth-trigger Become a Member
+				.col-xs-4
+					h5.footer-heading Resources
+					ul
+						li: a(href='/resources') Resources
+				.col-xs-4
+					h5.footer-heading Partners
+					ul 
+						each sponsor, i in sponsors
+							if i <= 2
+								li: a(href= sponsor.website, rel='external')= sponsor.name 
+						if sponsors.length > 3
+							li: a(href='/organizations') More...
