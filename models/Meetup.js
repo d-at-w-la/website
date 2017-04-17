@@ -26,6 +26,9 @@ Meetup.add({
 	map: { type: String, required: false, initial: true, width: 'medium', default: '1260 18th Street, Santa Monica, CA 90404', note: '' },
 	description: { type: Types.Html, wysiwyg: true },
 
+	isExternal: {type: Boolean, default: false},
+	eventLink: {type: String},
+
 	maxRSVPs: { type: Number, default: 100 },
 	totalRSVPs: { type: Number, noedit: true },
 

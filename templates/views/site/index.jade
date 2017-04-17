@@ -25,8 +25,11 @@ block intro
 					p.byline: strong #{meetup._.startDate.format('ddd, DD MMM YYYY')} &#8212; #{meetup._.startDate.format('h:mma')} - #{meetup._.endDate.format('h:mma')}
 					p.byline #{meetup.place} &#8212; 
 						a(href='http://maps.google.com.au/?daddr=' + (meetup.map || meetup.place), target='_blank') Directions
-				if meetup.state === 'active'
-					#react-hero-button
+				if meetup.state === 'active' 
+					if !meetup.isExternal
+						#react-hero-button
+					else 
+						.hero-button: a.btn.btn-primary.btn-lg.btn-block(href=meetup.eventLink, target="_blank") Go To Event Page
 			//- Details
 			section.hero-details: .container
 				.row: .col-sm-10.col-sm-offset-1: .row
@@ -72,7 +75,7 @@ block intro
 													.summary!= talk.description
 				//- Attending
 				section.attending
-					#react-attending
+					//- #react-attending
 
 //- BODY
 block content
