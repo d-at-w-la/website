@@ -58,12 +58,12 @@ Resource.relationship({ ref: 'ResourceComment', refPath: 'resource', path: 'comm
 				author: results.author ? results.author.name.full : 'Somebody',
 				title: Resource.title,
 				keystoneURL: 'http://www.sydjs.com/keystone/Resource/' + Resource.id,
-				subject: 'New Resource to SydJS'
+				subject: 'New Resource to D@W-LA'
 			}, {
 				to: admin,
 				from: {
-					name: 'SydJS',
-					email: 'contact@sydjs.com'
+					name: 'D@W-LA',
+					email: 'losangeles@democracyatwork.info'
 				}
 			}, done);
 		}, callback);

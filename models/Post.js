@@ -61,12 +61,12 @@ Post.relationship({ ref: 'PostComment', refPath: 'post', path: 'comments' });
 				author: results.author ? results.author.name.full : 'Somebody',
 				title: post.title,
 				keystoneURL: 'http://www.sydjs.com/keystone/post/' + post.id,
-				subject: 'New Post to SydJS'
+				subject: 'New Post to D@W-LA'
 			}, {
 				to: admin,
 				from: {
-					name: 'SydJS',
-					email: 'contact@sydjs.com'
+					name: 'D@W-LA',
+					email: 'losangelest@democracyatwork.info'
 				}
 			}, done);
 		}, callback);
@@ -81,8 +81,8 @@ Post.relationship({ ref: 'PostComment', refPath: 'post', path: 'comments' });
 			keystone.list('User').model.find().where('isAdmin', true).exec(next)
 		}
 	}, sendEmail);
-};
-*/
+};*/
+
 
 /**
  * Registration
