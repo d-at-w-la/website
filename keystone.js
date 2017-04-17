@@ -61,6 +61,7 @@ keystone.set('routes', require('./routes'));
 keystone.set('locals', {
 	_: require('lodash'),
 	moment: require('moment'),
+	tz: require('moment-timezone-all'),
 	js: 'javascript:;',
 	env: keystone.get('env'),
 	utils: keystone.utils,
