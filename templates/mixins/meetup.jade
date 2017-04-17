@@ -6,14 +6,14 @@ mixin meetup(meetup)
 
 	.tile.ph-1.pv-1
 		.meetup-calendar.calendar.hidden-xs.hidden-sm(class=meetup.state == 'past' ? 'calendar--past' : null)
-			.calendar__header=meetup._.startDate.format('MMM')
+			.calendar__header=moment(meetup.startDate).tz('America/Los_Angeles').format('MMM')
 			.calendar__body
-				.calendar__date=meetup._.startDate.format('DD')
-				.calendar__year=meetup._.startDate.format('YYYY')
+				.calendar__date=moment(meetup.startDate).tz('America/Los_Angeles').format('DD')
+				.calendar__year=moment(meetup.startDate).tz('America/Los_Angeles').format('YYYY')
 		.meetup-content
 			h2.mv-5= meetup.name
-			h5.mb-1=meetup._.startDate.format('dddd D MMM YYYY')
-				|  from #{meetup._.startDate.format('h:mma')} - #{meetup._.endDate.format('h:mma')}
+			h5.mb-1=moment(meetup.startDate).tz('America/Los_Angeles').format('dddd D MMM YYYY')
+				|  from #{moment(meetup.startDate).tz('America/Los_Angeles').format('h:mma')} - #{moment(meetup.endDate).tz('America/Los_Angeles').format('h:mma')}
 			if meetup.description
 				p!= meetup.description
 			if meetup.talks.length
@@ -25,26 +25,29 @@ mixin meetup(meetup)
 		if meetup.state == 'active'
 			hr.mv-2
 			.meetup-cta
-				if user
-					if meetup.rsvpsAvailable
-						h4.hero-button-title
-							if !rsvpStatus.rsvped && rsvpStatus.attending
-								span RSVP Confirmed!
-							else
-								span Are you coming?&nbsp;
-								span.text-thin (#{plural(meetup.remainingRSVPs, '* spot left', '* spots left')})
-
-						include ../includes/attendance-toggle
-					else
-						.alert.alert-success.mb-0.text-center No more tickets&hellip;
-
-				else
-					#next-meetup(data-id=meetup.id)
+				if meetup.isExternal
+					.hero-button: a.btn.btn-primary.btn-lg.btn-block(href=meetup.eventLink, target="_blank") Go To Event Page
+				else 
+					if user
 						if meetup.rsvpsAvailable
-							a(href='/join', data-from=page.path).btn.btn-primary.btn-lg.btn-block.js-auth-trigger RSVP Now 
-								span.text-thin (#{plural(meetup.remainingRSVPs, '* spot left', '* spots left')})
+							h4.hero-button-title
+								if !rsvpStatus.rsvped && rsvpStatus.attending
+									span RSVP Confirmed!
+								else
+									span Are you coming?&nbsp;
+									span.text-thin (#{plural(meetup.remainingRSVPs, '* spot left', '* spots left')})
+
+							include ../includes/attendance-toggle
 						else
-							.alert.alert-success.mb-0.text-center No more tickets&hellip;
+							.alert.alert-success.mb-0.text-center No more spots&hellip;
+
+					else
+						#next-meetup(data-id=meetup.id)
+							if meetup.rsvpsAvailable
+								a(href='/join', data-from=page.path).btn.btn-primary.btn-lg.btn-block.js-auth-trigger RSVP Now 
+									span.text-thin (#{plural(meetup.remainingRSVPs, '* spot left', '* spots left')})
+							else
+								.alert.alert-success.mb-0.text-center No more spots&hellip;
 
 		else if meetup.totalRSVPs
 			hr
