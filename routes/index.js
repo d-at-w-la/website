@@ -7,6 +7,7 @@ var middleware = require('./middleware');
 var graphqlHTTP = require('express-graphql');
 var graphQLSchema = require('../graphql/basicSchema').default;
 var relaySchema = require('../graphql/relaySchema').default;
+var passport = require('passport');
 
 var importRoutes = keystone.importer(__dirname);
 
@@ -50,6 +51,19 @@ exports = module.exports = function (app) {
 		cache: true,
 		precompile: true,
 	}));
+
+	// Init passport
+	app.use(passport.initialize());
+	app.use(passport.session());
+	/*passport.serializeUser(function(user, done) {
+	  console.log('Passport serializeUser:', user);
+	  done(null, user);
+	});
+
+	passport.deserializeUser(function(user, done) {
+	  console.log('Passport deserializeUser:', user);
+	  done(null, user);
+	});*/
 
 	app.use('/js', browserify('./client/scripts', {
 		external: clientConfig.packages,
