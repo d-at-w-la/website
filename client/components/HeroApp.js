@@ -39,7 +39,7 @@ var HeroApp = React.createClass({
 		if (this.state.rsvp.attending) {
 			return <h4 className="hero-button-title"><span className = "welcome-message">We have your RSVP</span></h4>
 		} else {
-			return <h4 className="hero-button-title">Are you coming? <br /> <span className="spots-left">{this.state.meetup.remainingRSVPs}<span className="text-thin"> spots left</span></span><br /></h4>
+			return <h4 className="hero-button-title">Are you coming? <br /></h4>
 		}
 	},
 
@@ -63,7 +63,7 @@ var HeroApp = React.createClass({
 		return (
 			<div className="hero-button" onClick={this.toggleRSVP.bind(this, true)}>
 				<a className="btn btn-primary btn-lg btn-block">
-					RSVP Now (<span className="text-thin">{this.state.meetup.remainingRSVPs} spots left</span>)
+					RSVP Now
 				</a>
 			</div>
 		);
@@ -100,7 +100,7 @@ var HeroApp = React.createClass({
 	renderRSVPSignin: function() {
 		return (
 			<div className="hero-button">
-				<a className="btn btn-primary btn-lg btn-block js-auth-trigger" onClick={this.signinModalTrigger}>RSVP Now <span className="text-thin">({this.state.meetup.remainingRSVPs} spots left)</span></a>
+				<a className="btn btn-primary btn-lg btn-block js-auth-trigger" onClick={this.signinModalTrigger}>RSVP Now</a>
 			</div>
 		);
 	},

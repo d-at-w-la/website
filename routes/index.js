@@ -95,9 +95,9 @@ exports = module.exports = function (app) {
 	app.get('/', routes.views.index);
 	app.get('/meetups', routes.views.meetups);
 	app.get('/meetups/:meetup', routes.views.meetup);
-	app.get('/members', routes.views.members);
+	/*app.get('/members', routes.views.members);
 	app.get('/members/mentors', routes.views.mentors);
-	app.get('/member/:member', routes.views.member);
+	app.get('/member/:member', routes.views.member);*/
 	app.get('/organizations', routes.views.organisations);
 	app.get('/links', routes.views.links);
 	app.get('/links/:tag?', routes.views.links);
