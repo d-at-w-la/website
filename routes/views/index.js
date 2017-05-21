@@ -18,12 +18,12 @@ exports = module.exports = function(req, res) {
 
 	locals.user = req.user;
 	
-	// Load the first, NEXT meetup
+	// Load the immediate next "active" meetup
 	
 	view.on('init', function(next) {
 		Meetup.model.findOne()
 			.where('state', 'active')
-			.sort('-startDate')
+			.sort('startDate')
 			.exec(function(err, activeMeetup) {
 				locals.activeMeetup = activeMeetup;
 				next();
@@ -32,7 +32,7 @@ exports = module.exports = function(req, res) {
 	});
 	
 	
-	// Load the first, PAST meetup
+	// Load the most recent "past" meetup
 	
 	view.on('init', function(next) {
 		Meetup.model.findOne()

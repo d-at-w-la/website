@@ -71,20 +71,22 @@ Meetup.schema.virtual('rsvpsAvailable').get(function() {
 
 Meetup.schema.pre('save', function(next) {
 	var meetup = this;
+	var currentMoment = moment().tz('America/Los_Angeles');
+
 	// no published date, it's a draft meetup
 	if (!meetup.publishedDate) {
 		meetup.state = 'draft';
 	}
-	// meetup date plus one day is after today, it's a past meetup
-	else if (moment().isAfter(moment(meetup.startDate).add('day', 1))) {
+	// current date is 1 day or more than startDate, meetup is 'past'
+	else if (currentMoment.isAfter(moment(meetup.startDate).tz('America/Los_Angeles').add('day', 1))) {
 		meetup.state = 'past';
 	}
-	// publish date is after today, it's an active meetup
-	else if (moment().isAfter(meetup.publishedDate)) {
+	// current date is after published date, meet up is "active"
+	else if (currentMoment.isAfter(moment(meetup.publishedDate).tz('America/Los_Angeles'))) {
 		meetup.state = 'active';
 	}
-	// publish date is before today, it's a scheduled meetup
-	else if (moment().isBefore(moment(meetup.publishedDate))) {
+	// current date is before published date, meet up is "scheduled"
+	else if (currentMoment.isBefore(moment(meetup.publishedDate).tz('America/Los_Angeles'))) {
 		meetup.state = 'scheduled';
 	}
 	next();
